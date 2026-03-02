@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/bfgarcia">
-    <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=28&duration=3000&pause=1000&color=0F3460&center=true&vCenter=true&width=600&lines=Fabian+Garcia;Systems+Architect+%C2%B7+AI+Platform+Engineer" alt="Typing SVG" />
+    <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=28&duration=3000&pause=1000&color=0F3460&center=true&vCenter=true&width=800&lines=Billy+Fabian+Garcia;Systems+Architect+%C2%B7+AI+Platform+Engineer" alt="Typing SVG" />
   </a>
 </p>
 

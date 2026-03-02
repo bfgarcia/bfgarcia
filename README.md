@@ -93,37 +93,49 @@ graph TB
 EPOCH integrates directly with Cisco security APIs to provide real-time voice-driven threat intelligence — built by an SE, for SEs.
 
 ```mermaid
-graph LR
-    subgraph INPUT["Voice Query"]
-        Q["'Any critical UCS advisories?'"]
+graph TB
+    subgraph INPUT["Voice Input"]
+        direction LR
+        Q1["'Any critical UCS advisories?'"]
+        Q2["'Latest Talos threat campaigns?'"]
+        Q3["'Generate a security brief'"]
     end
 
-    subgraph ROUTING["Intelligent Routing"]
-        R["Domain Classifier"]
+    subgraph ROUTING["EPOCH Domain Classifier"]
+        direction LR
+        R["Deterministic Router<br/>Product Keywords · Severity · CVE Pattern"]
     end
 
-    subgraph CISCO["Cisco APIs"]
-        direction TB
-        PSIRT["PSIRT openVuln API<br/>OAuth2 · 4 tools"]
-        TALOS["Talos Threat Intel<br/>RSS + GitHub IOCs · 2 tools"]
-        SEARCH["Advisory Search<br/>OpenSearch Hybrid · 1 tool"]
+    subgraph CISCO["Cisco Security APIs"]
+        direction LR
+        PSIRT["PSIRT openVuln API<br/>OAuth2 · 4 Tools<br/>UCS · Nexus · Catalyst · ASA<br/>Meraki · Firepower · IOS XE"]
+        TALOS["Talos Threat Intel<br/>RSS + GitHub STIX · 2 Tools<br/>Campaigns · IOCs · MITRE ATT&CK"]
+        SEARCH["Advisory Search<br/>OpenSearch Hybrid · 1 Tool<br/>BM25 + Vector Semantic"]
     end
 
-    subgraph OUTPUT["Response"]
-        RPT["Voice Response +<br/>PDF/PPTX Reports"]
+    subgraph OUTPUT["Response Layer"]
+        direction LR
+        VOICE["Voice Response<br/>1-2 Sentences via TTS"]
+        REPORT["Report Generator<br/>PDF · PPTX · 507 Cisco Icons"]
     end
 
     INPUT --> ROUTING
-    ROUTING --> CISCO
-    CISCO --> OUTPUT
+    ROUTING --> PSIRT
+    ROUTING --> TALOS
+    ROUTING --> SEARCH
+    PSIRT --> OUTPUT
+    TALOS --> OUTPUT
+    SEARCH --> OUTPUT
 
     classDef cisco fill:#049fd9,stroke:#fff,color:#fff
     classDef input fill:#1a1a2e,stroke:#a8b2d1,color:#fff
+    classDef routing fill:#16213e,stroke:#a8b2d1,color:#fff
     classDef output fill:#0f3460,stroke:#a8b2d1,color:#fff
 
     class PSIRT,TALOS,SEARCH cisco
-    class Q,R input
-    class RPT output
+    class Q1,Q2,Q3 input
+    class R routing
+    class VOICE,REPORT output
 ```
 
 | Capability | Tools | What It Does |

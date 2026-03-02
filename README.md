@@ -88,6 +88,66 @@ graph TB
 
 ---
 
+### Cisco SE Intelligence
+
+EPOCH integrates directly with Cisco security APIs to provide real-time voice-driven threat intelligence — built by an SE, for SEs.
+
+```mermaid
+graph LR
+    subgraph INPUT["Voice Query"]
+        Q["'Any critical UCS advisories?'"]
+    end
+
+    subgraph ROUTING["Intelligent Routing"]
+        R["Domain Classifier"]
+    end
+
+    subgraph CISCO["Cisco APIs"]
+        direction TB
+        PSIRT["PSIRT openVuln API<br/>OAuth2 · 4 tools"]
+        TALOS["Talos Threat Intel<br/>RSS + GitHub IOCs · 2 tools"]
+        SEARCH["Advisory Search<br/>OpenSearch Hybrid · 1 tool"]
+    end
+
+    subgraph OUTPUT["Response"]
+        RPT["Voice Response +<br/>PDF/PPTX Reports"]
+    end
+
+    INPUT --> ROUTING
+    ROUTING --> CISCO
+    CISCO --> OUTPUT
+
+    classDef cisco fill:#049fd9,stroke:#fff,color:#fff
+    classDef input fill:#1a1a2e,stroke:#a8b2d1,color:#fff
+    classDef output fill:#0f3460,stroke:#a8b2d1,color:#fff
+
+    class PSIRT,TALOS,SEARCH cisco
+    class Q,R input
+    class RPT output
+```
+
+| Capability | Tools | What It Does |
+|:-----------|:-----:|:-------------|
+| **PSIRT Advisories** | 4 | Query by product (UCS, Nexus, Catalyst, ASA, Meraki, Firepower, IOS XE, Intersight, SD-WAN), by severity, by CVE, or latest. Live Cisco openVuln API v2 with OAuth2. |
+| **Talos Threat Intel** | 2 | Latest threat research blog posts filtered by campaign type (ransomware, APT, malware). IOCs with file hashes, C2 domains/IPs, and MITRE ATT&CK mappings from STIX 2.0 bundles. |
+| **Semantic Search** | 1 | Natural language search across all indexed advisories. Hybrid BM25 + vector search via OpenSearch. "Supply chain attacks targeting UCS" just works. |
+| **Report Generation** | 1 | Auto-generates branded PDF/PPTX reports from live PSIRT + Talos data. 507 Cisco network icons. Security briefs on demand. |
+
+**Total: 8 Cisco tools across 3 MCP servers — all voice-activated, all local.**
+
+> *"Hey Aria, any critical Nexus advisories?"*
+> *"There are 3 critical advisories for Nexus. The most recent is a remote code execution in NX-OS, published last week."*
+
+**Certifications:**
+![Cisco GenAI Blue Belt](https://img.shields.io/badge/Cisco_GenAI_Blue_Belt-049fd9?style=flat-square&logo=cisco&logoColor=white)
+![Cisco GenAI Green Belt](https://img.shields.io/badge/Cisco_GenAI_Green_Belt-049fd9?style=flat-square&logo=cisco&logoColor=white)
+![FY24 Security Sales Superstar](https://img.shields.io/badge/FY24_Security_Sales_Superstar-049fd9?style=flat-square&logo=cisco&logoColor=white)
+![DC Trailblazer Award](https://img.shields.io/badge/DC_Trailblazer_Award-049fd9?style=flat-square&logo=cisco&logoColor=white)
+
+**Roadmap:** CX Cloud contracts and alerts, Bug Search / End-of-Life API, DevNet documentation search, [AGNTCY](https://agntcy.org/) agent interoperability standards.
+
+---
+
 ### By the Numbers
 
 | Metric | Value |
